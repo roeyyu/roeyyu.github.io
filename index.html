@@ -1,1 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roey Yu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card: #121829;
+      --accent: #4f8cff;
+      --muted: #9aa4bf;
+      --text: #eef1ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: radial-gradient(circle at top, #111633, var(--bg));
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    header {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 4rem;
+    }
+
+    header h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    header p {
+      color: var(--muted);
+      max-width: 600px;
+    }
+
+    section {
+      margin-bottom: 3.5rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      color: #dbe2ff;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .card {
+      background: linear-gradient(180deg, #151c36, var(--card));
+      padding: 1.4rem;
+      border-radius: 14px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+    }
+
+    .card a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: 0.4rem;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 4rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Roey Yu</h1>
+      <p>BSc Kinesiology student focused on human performance, research, and applied health science. This site is a central hub for my work, experience, and projects.</p>
+    </header>
+
+    <section>
+      <h2>Professional</h2>
+      <div class="grid">
+        <div class="card">
+          <a href="https://your-resume-link.pdf" target="_blank">Resume</a>
+          <p>PDF version of my academic and professional experience.</p>
+        </div>
+        <div class="card">
+          <a href="https://www.linkedin.com/in/yourname" target="_blank">LinkedIn</a>
+          <p>Professional profile and networking.</p>
+        </div>
+        <div class="card">
+          <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+          <p>Code, projects, and technical work.</p>
+        </div>
+        <div class="card">
+          <a href="" target="_blank">Projects</a>
+          <p>Selected academic and applied projects.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Personal</h2>
+      <div class="grid">
+        <div class="card">
+          <a href="https://letterboxd.com/yourusername" target="_blank">Letterboxd</a>
+          <p>Films I watch, rate, and revisit.</p>
+        </div>
+        <div class="card">
+          <a href="https://myanimelist.net/profile/yourusername" target="_blank">MyAnimeList</a>
+          <p>Anime and manga tracking.</p>
+        </div>
+        <div class="card">
+          <a href="https://steamcommunity.com/id/yourusername" target="_blank">Steam</a>
+          <p>Games, playtime, and achievements.</p>
+        </div>
+        <div class="card">
+          <a href="" target="_blank">Tekken Rank</a>
+          <p>Competitive ranking and stats.</p>
+        </div>
+        <div class="card">
+          <a href="" target="_blank">Minesweeper</a>
+          <p>Records and puzzle performance.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Selected Work</h2>
+      <div class="grid">
+        <div class="card">
+          <strong>Thin-Layer Chromatography Analysis</strong>
+          <p>Identification of analgesic compounds using reference standards.</p>
+        </div>
+        <div class="card">
+          <strong>Aspirin Synthesis & Purification</strong>
+          <p>Recrystallization, vacuum filtration, and yield analysis.</p>
+        </div>
+        <div class="card">
+          <strong>Exercise Physiology Presentation</strong>
+          <p>Incremental ramp protocols and physiological performance metrics.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 Roey Yu
+    </footer>
+  </main>
+</body>
+</html>
 
