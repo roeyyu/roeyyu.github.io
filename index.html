@@ -10,11 +10,13 @@
 
   <style>
     :root {
-      --bg: #000;
-      --card: #111;
-      --red: #e10600;
-      --text: #f2f2f2;
-      --muted: #9a9a9a;
+      --green-dark: #0f1f17;
+      --green: #1f3d2b;
+      --sky: #7fb1c9;
+      --card: rgba(15, 25, 20, 0.85);
+      --accent: #8fd3a7;
+      --text: #eef6f1;
+      --muted: #a8c3b3;
     }
 
     * {
@@ -28,178 +30,217 @@
       color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
-      background: repeating-linear-gradient(
-        45deg,
-        #000,
-        #000 20px,
-        #120000 20px,
-        #120000 40px
+      background: linear-gradient(
+        to bottom,
+        var(--sky) 0%,
+        #9cc9dc 30%,
+        var(--green) 60%,
+        var(--green-dark) 100%
       );
-      background-size: 200% 200%;
-      animation: squiggle 20s linear infinite;
     }
 
-    @keyframes squiggle {
-      0% { background-position: 0% 0%; }
-      100% { background-position: 200% 200%; }
+    /* ===== CLOUD LAYER ===== */
+    .clouds {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.35) 0 120px, transparent 140px),
+        radial-gradient(circle at 60% 30%, rgba(255,255,255,0.25) 0 160px, transparent 190px),
+        radial-gradient(circle at 80% 10%, rgba(255,255,255,0.2) 0 100px, transparent 130px);
+      animation: cloudsMove 90s linear infinite;
+    }
+
+    @keyframes cloudsMove {
+      from { background-position: 0 0; }
+      to { background-position: -2000px 0; }
+    }
+
+    /* ===== BREEZE LAYER ===== */
+    .breeze {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: repeating-linear-gradient(
+        -10deg,
+        rgba(255,255,255,0.03),
+        rgba(255,255,255,0.03) 2px,
+        transparent 2px,
+        transparent 14px
+      );
+      animation: breeze 25s linear infinite;
+    }
+
+    @keyframes breeze {
+      from { background-position: 0 0; }
+      to { background-position: 600px 300px; }
     }
 
     a {
-      color: var(--red);
+      color: var(--accent);
       text-decoration: none;
     }
 
-    a:hover { opacity: 0.8; }
+    a:hover { opacity: 0.85; }
 
     .container {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 0 1.5rem 4rem;
+      padding: 0 2rem 5rem;
     }
 
     section {
-      margin-bottom: 5rem;
-      animation: fadeUp 0.9s ease both;
+      margin-bottom: 6rem;
     }
 
     h1, h2 {
       font-family: 'Playfair Display', serif;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.4px;
     }
 
     h1 {
-      font-size: 3.4rem;
+      font-size: 3.6rem;
       margin-bottom: 1rem;
     }
 
     h2 {
-      font-size: 1.8rem;
+      font-size: 1.9rem;
       margin-bottom: 1.5rem;
-      border-left: 4px solid var(--red);
-      padding-left: 0.75rem;
+      color: var(--accent);
     }
 
     p {
       color: var(--muted);
-      max-width: 760px;
+      max-width: 720px;
     }
 
-    /* HERO */
+    /* ===== HERO ===== */
     .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      position: relative;
     }
 
-    .hero span { color: var(--red); }
-
-    /* fade hero on scroll */
-    body:has(.container:hover) .hero {
-      opacity: 0.2;
-      transform: translateY(-40px);
+    .hero-inner {
+      max-width: 800px;
     }
 
-    /* Grid */
+    .scroll-btn {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.3);
+      background: rgba(0,0,0,0.2);
+      color: var(--text);
+      font-size: 0.85rem;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      transition: all 0.3s ease;
+    }
+
+    .scroll-btn:hover {
+      transform: translateX(-50%) translateY(-4px);
+      background: rgba(0,0,0,0.35);
+    }
+
+    /* ===== OFFSET SECTIONS ===== */
+    .offset-left { margin-left: 4rem; }
+    .offset-right { margin-left: auto; margin-right: 4rem; }
+
+    /* ===== GRID ===== */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
+      gap: 2rem;
     }
 
     .card {
-      background: linear-gradient(180deg, #141414, var(--card));
-      padding: 1.75rem;
-      border-radius: 14px;
-      border: 1px solid #1e1e1e;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: var(--card);
+      padding: 1.8rem;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      transition: transform 0.35s ease;
     }
 
     .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(225, 6, 0, 0.18);
+      transform: translateY(-8px) rotate(-0.3deg);
     }
 
-    .card h3 { margin-bottom: 0.5rem; }
-
-    .tag {
-      display: inline-block;
-      margin-top: 0.75rem;
-      font-size: 0.75rem;
-      letter-spacing: 1px;
-      color: var(--red);
-    }
-
-    /* Pills */
+    /* ===== LINKS ===== */
     .links {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 0.8rem;
     }
 
     .pill {
-      padding: 0.55rem 1.15rem;
+      padding: 0.45rem 0.9rem;
       border-radius: 999px;
-      background: #141414;
-      border: 1px solid #222;
-      transition: all 0.25s ease;
-      font-size: 0.85rem;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.15);
+      font-size: 0.75rem;
     }
 
-    .pill:hover {
-      background: var(--red);
-      color: black;
-    }
-
-    /* Skills */
+    /* ===== SKILLS ===== */
     .skills {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.7rem;
-      margin-top: 1rem;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
     }
 
     .skill {
       padding: 0.4rem 0.7rem;
       border-radius: 999px;
-      background: #141414;
-      border: 1px solid #222;
-      font-size: 0.75rem;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.7rem;
       color: var(--muted);
     }
 
     footer {
       text-align: center;
       padding: 2rem;
-      color: #666;
-      font-size: 0.9rem;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      color: #cfe3d7;
+      font-size: 0.85rem;
     }
   </style>
 </head>
 
 <body>
+
+  <!-- BACKGROUND LAYERS -->
+  <div class="clouds"></div>
+  <div class="breeze"></div>
+
   <div class="container">
 
     <!-- HERO -->
     <section class="hero">
-      <div>
-        <h1>Roey <span>Yu</span></h1>
-        <p>Bachelors of Science in Kinesiology | Specialization in Exercise and Health Physiology | Rehab and Physio | Photographer and Melomaniac | Tekken Tournament Player</p>
+      <div class="hero-inner">
+        <h1>Roey Yu</h1>
+        <p>
+          Bachelors of Science in Kinesiology | Specialization in Exercise and Health Physiology | Rehab and Physio | Photographer and Melomaniac | Tekken King
+        </p>
       </div>
+
+      <button class="scroll-btn" onclick="document.getElementById('professional').scrollIntoView({behavior:'smooth'})">
+        ↓ Explore
+      </button>
     </section>
 
     <!-- PROFESSIONAL -->
-    <section>
-      <h2>Professional Links</h2>
+    <section id="professional" class="offset-left">
+      <h2>Professional</h2>
       <div class="links">
-        <a class="pill" href="https://www.linkedin.com/in/roey-yu-853a39260/?originalSubdomain=ca" target="_blank">LinkedIn</a>
+        <a class="pill" href="https://www.linkedin.com/in/roey-yu-853a39260/" target="_blank">LinkedIn</a>
         <a class="pill" href="https://www.instagram.com/_roeyyu_/" target="_blank">Instagram</a>
         <span class="pill">yuroey@gmail.com</span>
         <span class="pill">587-225-4225</span>
@@ -207,61 +248,54 @@
     </section>
 
     <!-- PERSONAL -->
-    <section>
-      <h2>Personal Links</h2>
+    <section class="offset-right">
+      <h2>Personal</h2>
       <div class="links">
         <a class="pill" href="https://open.spotify.com/user/4788p79ms20bt70l3z34es18t" target="_blank">Spotify</a>
-        <a class="pill" href="https://letterboxd.com/roeyu/" target="_blank">Letterboxd</a>
-        <a class="pill" href="https://steamcommunity.com/profiles/76561199225402800/" target="_blank">Steam</a>
-        <a class="pill" href="https://www.twitch.tv/oroeyo" target="_blank">Twitch</a>
-        <a class="pill" href="https://myanimelist.net/animelist/roeyo" target="_blank">Anime</a>
-        <a class="pill" href="https://minesweeper.online/player/9797373" target="_blank">Sweeping</a>
-        <a class="pill" href="https://wank.wavu.wiki/player/5ANMm5Nihg8h?graph=sess" target="_blank">T8</a>
-        <a class="pill" href="https://www.instagram.com/roeyu_an/" target="_blank">Photography IG</a>
+        <a class="pill" href="https://letterboxd.com/roeyu/" target="_blank">Letterboxd</a> 
+        <a class="pill" href="https://steamcommunity.com/profiles/76561199225402800/" target="_blank">Steam</a> 
+        <a class="pill" href="https://www.twitch.tv/oroeyo" target="_blank">Twitch</a> 
+        <a class="pill" href="https://myanimelist.net/animelist/roeyo" target="_blank">Anime</a> 
+        <a class="pill" href="https://minesweeper.online/player/9797373" target="_blank">Sweeping</a> 
+        <a class="pill" href="https://wank.wavu.wiki/player/5ANMm5Nihg8h?graph=sess" target="_blank">T8</a> 
+        <a class="pill" href="https://www.instagram.com/roeyu_an/" target="_blank">Photography IG</a> 
         <a class="pill" href="https://vsco.co/roeyyu/gallery" target="_blank">VSCO</a>
       </div>
     </section>
 
-    <!-- ACADEMIC PROJECTS -->
-    <section>
-      <h2>Highlighted Academic Projects</h2>
+    <!-- ACADEMICS -->
+    <section class="offset-left">
+      <h2>Academic Work</h2>
       <div class="grid">
-        <div class="card"><h3>Stroke Rehabilitation Presentation</h3><p>MCA pathology, recovery pathways, and rehab implications.</p><span class="tag">MCA</span></div>
-        <div class="card"><h3>Aspirin Synthesis & Caffeine Analysis</h3><p>OCEM synthesis, purification, and TLC verification.</p><span class="tag">OCEM</span></div>
-        <div class="card"><h3>Hands-On Cadaver Lab</h3><p>Functional musculoskeletal anatomical exploration.</p><span class="tag">Anatomy</span></div>
-        <div class="card"><h3>SymmetryU Ergoline Presentation</h3><p>Ergoline compounds, mechanisms, and PPO-IC context.</p><span class="tag">SymmetryU</span></div>
+        <div class="card"><h3>Stroke Rehab (MCA)</h3><p>Pathology, recovery, and rehabilitation strategy.</p></div>
+        <div class="card"><h3>Aspirin & Caffeine</h3><p>OCEM synthesis, purification, TLC analysis.</p></div>
+        <div class="card"><h3>Cadaver Lab</h3><p>Applied musculoskeletal anatomy.</p></div>
+        <div class="card"><h3>SymmetryU Ergoline</h3><p>Pharmacology and PPO-IC context.</p></div>
       </div>
     </section>
 
     <!-- EXPERIENCE -->
-    <section>
+    <section class="offset-right">
       <h2>Experience</h2>
       <div class="grid">
-        <div class="card"><h3>Crunch Fitness</h3><p>In-person consultations, InBody analysis, personal training.</p></div>
-        <div class="card"><h3>AST Physiotherapy</h3><p>Clinical assistant for laser, ART, acupuncture, MT, and chiropractic care.</p></div>
-        <div class="card"><h3>UofC Rehab Volunteer</h3><p>Individualized rehab sessions with diverse populations.</p></div>
+        <div class="card"><h3>Crunch Fitness</h3><p>Consultations, InBody analysis, personal training.</p></div>
+        <div class="card"><h3>AST Physiotherapy</h3><p>Laser, ART, acupuncture, MT, chiropractic support.</p></div>
+        <div class="card"><h3>UofC Rehab Volunteer</h3><p>Individualized rehab sessions.</p></div>
       </div>
 
       <div class="skills">
         <span class="skill">Client Assessment</span>
         <span class="skill">Laser Therapy</span>
         <span class="skill">ART & IFC</span>
-        <span class="skill">Manual Therapy Support</span>
         <span class="skill">InBody Analysis</span>
-        <span class="skill">Rehabilitation Assistance</span>
-        <span class="skill">Clear Communication</span>
-        <span class="skill">Professional Conduct</span>
+        <span class="skill">Rehab Assistance</span>
+        <span class="skill">Professional Communication</span>
       </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section>
-      <h2>Projects & Resume</h2>
-      <p>gonna fix this soon.</p>
     </section>
 
   </div>
 
   <footer>© 2025 Roey Yu</footer>
+
 </body>
 </html>
