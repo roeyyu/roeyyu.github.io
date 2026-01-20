@@ -10,7 +10,7 @@
 
   <style>
     :root {
-      --bg: #0a0a0a;
+      --bg: #000;
       --card: #111;
       --red: #e10600;
       --text: #f2f2f2;
@@ -28,20 +28,20 @@
       color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
-      background: linear-gradient(
-        120deg,
+      background: repeating-linear-gradient(
+        45deg,
         #000,
-        #120000,
-        #000
+        #000 20px,
+        #120000 20px,
+        #120000 40px
       );
-      background-size: 300% 300%;
-      animation: waveBG 18s ease infinite;
+      background-size: 200% 200%;
+      animation: squiggle 14s linear infinite;
     }
 
-    @keyframes waveBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes squiggle {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 200% 200%; }
     }
 
     a {
@@ -49,14 +49,12 @@
       text-decoration: none;
     }
 
-    a:hover {
-      opacity: 0.8;
-    }
+    a:hover { opacity: 0.8; }
 
     .container {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 4rem 1.5rem;
+      padding: 0 1.5rem 4rem;
     }
 
     section {
@@ -70,7 +68,7 @@
     }
 
     h1 {
-      font-size: 3rem;
+      font-size: 3.4rem;
       margin-bottom: 1rem;
     }
 
@@ -86,18 +84,25 @@
       max-width: 760px;
     }
 
-    /* Hero */
+    /* HERO */
     .hero {
-      min-height: 70vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
-    .hero span {
-      color: var(--red);
+    .hero span { color: var(--red); }
+
+    /* fade hero on scroll */
+    body:has(.container:hover) .hero {
+      opacity: 0.2;
+      transform: translateY(-40px);
     }
 
-    /* Grid Cards */
+    /* Grid */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -117,10 +122,7 @@
       box-shadow: 0 20px 40px rgba(225, 6, 0, 0.18);
     }
 
-    .card h3 {
-      margin-bottom: 0.5rem;
-      color: var(--text);
-    }
+    .card h3 { margin-bottom: 0.5rem; }
 
     .tag {
       display: inline-block;
@@ -176,14 +178,8 @@
     }
 
     @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -195,9 +191,7 @@
     <section class="hero">
       <div>
         <h1>Roey <span>Yu</span></h1>
-        <p>
-          Kinesiology student. Rehab & physiotherapy assistant. Photographer and melomaniac.
-        </p>
+        <p>Kinesiology student. Rehab & physiotherapy assistant. Photographer and melomaniac.</p>
       </div>
     </section>
 
@@ -217,7 +211,7 @@
     <section>
       <h2>Personal</h2>
       <div class="links">
-        <a class="pill" href="https://open.spotify.com/user/4788p79ms20bt70l3z34es18t?si=7c4b41123c6546b1" target="_blank">Spotify</a>
+        <a class="pill" href="https://open.spotify.com/user/4788p79ms20bt70l3z34es18t" target="_blank">Spotify</a>
         <a class="pill" href="https://letterboxd.com/roeyu/" target="_blank">Letterboxd</a>
         <a class="pill" href="https://steamcommunity.com/profiles/76561199225402800/" target="_blank">Steam</a>
         <a class="pill" href="https://www.twitch.tv/oroeyo" target="_blank">Twitch</a>
@@ -232,26 +226,10 @@
     <section>
       <h2>Highlighted Academic Projects</h2>
       <div class="grid">
-        <div class="card">
-          <h3>Stroke Rehabilitation Presentation</h3>
-          <p>MCA presentation exploring stroke pathology, recovery pathways, and rehabilitation implications.</p>
-          <span class="tag">MCA</span>
-        </div>
-        <div class="card">
-          <h3>Aspirin Synthesis & Caffeine Analysis</h3>
-          <p>OCEM laboratory synthesis, purification, and analytical verification using TLC.</p>
-          <span class="tag">OCEM</span>
-        </div>
-        <div class="card">
-          <h3>Hands-On Cadaver Lab</h3>
-          <p>Applied anatomical exploration emphasizing musculoskeletal and functional relevance.</p>
-          <span class="tag">Anatomy</span>
-        </div>
-        <div class="card">
-          <h3>SymmetryU Ergoline Presentation</h3>
-          <p>Presentation on ergoline compounds, pharmacological mechanisms, and PPO-IC context.</p>
-          <span class="tag">SymmetryU</span>
-        </div>
+        <div class="card"><h3>Stroke Rehabilitation Presentation</h3><p>MCA pathology, recovery pathways, and rehab implications.</p><span class="tag">MCA</span></div>
+        <div class="card"><h3>Aspirin Synthesis & Caffeine Analysis</h3><p>OCEM synthesis, purification, and TLC verification.</p><span class="tag">OCEM</span></div>
+        <div class="card"><h3>Hands-On Cadaver Lab</h3><p>Functional musculoskeletal anatomical exploration.</p><span class="tag">Anatomy</span></div>
+        <div class="card"><h3>SymmetryU Ergoline Presentation</h3><p>Ergoline compounds, mechanisms, and PPO-IC context.</p><span class="tag">SymmetryU</span></div>
       </div>
     </section>
 
@@ -259,18 +237,9 @@
     <section>
       <h2>Experience</h2>
       <div class="grid">
-        <div class="card">
-          <h3>Crunch Fitness</h3>
-          <p>In-person fitness consultations, InBody scan analysis, and personal training.</p>
-        </div>
-        <div class="card">
-          <h3>AST Physiotherapy</h3>
-          <p>Clinical assistant supporting laser therapy, ART, acupuncture, MT, and chiropractic care.</p>
-        </div>
-        <div class="card">
-          <h3>UofC Rehab Volunteer</h3>
-          <p>Guided individualized rehab sessions with diverse populations.</p>
-        </div>
+        <div class="card"><h3>Crunch Fitness</h3><p>In-person consultations, InBody analysis, personal training.</p></div>
+        <div class="card"><h3>AST Physiotherapy</h3><p>Clinical assistant for laser, ART, acupuncture, MT, and chiropractic care.</p></div>
+        <div class="card"><h3>UofC Rehab Volunteer</h3><p>Individualized rehab sessions with diverse populations.</p></div>
       </div>
 
       <div class="skills">
@@ -285,16 +254,14 @@
       </div>
     </section>
 
-    <!-- PROJECTS / RESUME -->
+    <!-- PROJECTS -->
     <section>
       <h2>Projects & Resume</h2>
-      <p>gonna fix this soon.</p>
+      <p>Quiet for now. Updates coming.</p>
     </section>
 
   </div>
 
-  <footer>
-    © 2026 Roey Yu
-  </footer>
+  <footer>© 2026 Roey Yu</footer>
 </body>
 </html>
