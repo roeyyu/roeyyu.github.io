@@ -2,193 +2,250 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Roey Yu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roey Yu | Creative Portfolio</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #0b0f19;
-      --panel: #121829;
-      --soft: #1a2142;
-      --accent: #4f8cff;
-      --muted: #9aa4bf;
-      --text: #eef1ff;
+      --bg: #0a0a0a;
+      --card: #111;
+      --red: #e10600;
+      --text: #f2f2f2;
+      --muted: #9a9a9a;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
-      margin: 0;
-      font-family: 'Inter', system-ui, sans-serif;
-      background:
-        radial-gradient(circle at 20% 10%, #1b2352 0%, transparent 40%),
-        radial-gradient(circle at 80% 20%, #18204a 0%, transparent 45%),
-        var(--bg);
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top, #141414, var(--bg));
       color: var(--text);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    main {
+    a {
+      color: var(--red);
+      text-decoration: none;
+    }
+
+    a:hover {
+      opacity: 0.8;
+    }
+
+    /* Layout */
+    .container {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 3.5rem 1.5rem 4rem;
-    }
-
-    header {
-      margin-bottom: 5rem;
-    }
-
-    header h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.5rem;
-    }
-
-    header p {
-      color: var(--muted);
-      max-width: 680px;
-      font-size: 1.05rem;
+      padding: 4rem 1.5rem;
     }
 
     section {
-      margin-bottom: 4.5rem;
+      margin-bottom: 5rem;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    h1, h2 {
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 0.5px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
     }
 
     h2 {
-      font-size: 1.6rem;
-      font-weight: 600;
+      font-size: 1.8rem;
       margin-bottom: 1.5rem;
-      color: #dbe2ff;
+      border-left: 4px solid var(--red);
+      padding-left: 0.75rem;
     }
 
+    p {
+      color: var(--muted);
+      max-width: 750px;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero span {
+      color: var(--red);
+    }
+
+    /* Cards */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.4rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
     }
 
     .card {
-      background: linear-gradient(180deg, var(--soft), var(--panel));
-      padding: 1.5rem;
-      border-radius: 16px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      background: linear-gradient(180deg, #141414, var(--card));
+      padding: 1.75rem;
+      border-radius: 14px;
+      border: 1px solid #1e1e1e;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 30px 70px rgba(0,0,0,0.55);
+      box-shadow: 0 20px 40px rgba(225, 6, 0, 0.15);
     }
 
-    .card a {
-      color: var(--accent);
-      font-weight: 500;
-      text-decoration: none;
-      font-size: 1.05rem;
+    .card h3 {
+      margin-bottom: 0.5rem;
+      color: var(--text);
     }
 
-    .card p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin-top: 0.4rem;
+    .tag {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      color: var(--red);
     }
 
-    /* Photography section */
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.2rem;
+    /* Links */
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
-    .photo-grid img {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-      border-radius: 16px;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.5);
-      transition: transform 0.3s ease;
+    .pill {
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      background: #141414;
+      border: 1px solid #222;
+      transition: all 0.25s ease;
     }
 
-    .photo-grid img:hover {
-      transform: scale(1.03);
+    .pill:hover {
+      background: var(--red);
+      color: black;
     }
 
+    /* Footer */
     footer {
-      margin-top: 5rem;
       text-align: center;
-      color: var(--muted);
-      font-size: 0.85rem;
+      padding: 2rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
 
 <body>
-<main>
+  <div class="container">
 
-  <header>
-    <h1>Roey Yu</h1>
-    <p>
-      BSc student specializing in EXHP Kinesiology, focused on human performance,
-      applied health science, and clinical experience. This site is a curated hub
-      for my academic, professional, and personal work.
-    </p>
-  </header>
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <h1>Roey <span>Yu</span></h1>
+        <p>
+          Kinesiology student. Rehab & physiotherapy assistant. Photographer and melomaniac. 
+        </p>
+      </div>
+    </section>
 
-  <section>
-    <h2>Professional</h2>
-    <div class="grid">
-      <div class="card">
-        <a href="#">Resume</a>
-        <p>Academic and professional summary (PDF coming soon).</p>
+    <!-- PERSONAL LINKS -->
+    <section>
+      <h2>Personal</h2>
+      <div class="links">
+        <a class="pill" href="https://letterboxd.com/roeyu/" target="_blank">Letterboxd</a>
+        <a class="pill" href="https://steamcommunity.com/profiles/76561199225402800/" target="_blank">Steam</a>
+        <a class="pill" href="https://www.twitch.tv/oroeyo" target="_blank">Twitch</a>
+        <a class="pill" href="#">MAL</a>
+        <a class="pill" href="#">MW</a>
+        <a class="pill" href="#">WW</a>
+        <a class="pill" href="#">Flickr</a>
       </div>
-      <div class="card">
-        <a href="https://www.linkedin.com/in/roey-yu-853a39260/?originalSubdomain=ca" target="_blank">LinkedIn</a>
-        <p>Professional profile and experience.</p>
-      </div>
-      <div class="card">
-        <a href="#">Projects</a>
-        <p>Academic and applied work (in progress).</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <h2>Personal</h2>
-    <div class="grid">
-      <div class="card">
-        <a href="https://letterboxd.com/roeyu/" target="_blank">Letterboxd</a>
-        <p>Films I watch, rate, and revisit.</p>
+    <!-- ACADEMIC PROJECTS -->
+    <section>
+      <h2>Highlighted Academic Projects</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Stroke Rehabilitation Presentation</h3>
+          <p>MCA group presentation exploring stroke pathology, recovery pathways, and rehabilitation strategies.</p>
+          <span class="tag">MCA</span>
+        </div>
+        <div class="card">
+          <h3>Aspirin Synthesis & Caffeine Analysis</h3>
+          <p>OCEM laboratory project involving synthesis, purification, and analytical verification of aspirin and caffeine.</p>
+          <span class="tag">OCEM</span>
+        </div>
+        <div class="card">
+          <h3>Hands-On Cadaver Lab</h3>
+          <p>Applied anatomical exploration emphasizing musculoskeletal structures and functional relevance.</p>
+          <span class="tag">Anatomy</span>
+        </div>
       </div>
-      <div class="card">
-        <a href="https://myanimelist.net/profile/roeyo" target="_blank">MAL</a>
-        <p>Anime and manga tracking.</p>
-      </div>
-      <div class="card">
-        <a href="https://steamcommunity.com/profiles/76561199225402800/" target="_blank">Steam</a>
-        <p>Game Achievements.</p>
-      </div>
-      <div class="card">
-        <a href="https://wank.wavu.wiki/player/5ANMm5Nihg8h?graph=sess" target="_blank">WW</a>
-        <p>Tekken comp</p>
-      </div>
-      <div class="card">
-        <a href="https://minesweeper.online/player/9797373" target="_blank">MW</a>
-        <p>Minesweeper clips.</p>
-      </div>
-      <div class="card">
-        <a href="https://www.twitch.tv/oroeyo" target="_blank">Twitch</a>
-        <p>Tekken OV clips and streams.</p>
-      </div>
-      <div class="card">
-        <a href="https://open.spotify.com/user/4788p79ms20bt70l3z34es18t" target="_blank">Spotify</a>
-        <p>Playlists and Artist Picks.</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <h2>Photography</h2>
-    <div class="p
+    <!-- EXPERIENCE -->
+    <section>
+      <h2>Experience</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Crunch Fitness</h3>
+          <p>
+            Professional in-person fitness consultations, InBody scan analysis, and personal training.
+          </p>
+        </div>
+        <div class="card">
+          <h3>AST Physiotherapy</h3>
+          <p>
+            Clinical physiotherapy assistant supporting laser therapy, ART, acupuncture, manual therapy, and chiropractic care.
+          </p>
+        </div>
+        <div class="card">
+          <h3>UofC Rehab Volunteer</h3>
+          <p>
+            Guided individualized rehab sessions with diverse populations.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS / RESUME -->
+    <section>
+      <h2>Projects & Resume</h2>
+      <p>
+        This space is intentionally quiet for now. New work will land here soon.
+      </p>
+    </section>
+
+  </div>
+
+  <footer>
+    © 2026 Roey Yu
+  </footer>
+</body>
+</html>
