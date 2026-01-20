@@ -25,10 +25,23 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at top, #141414, var(--bg));
       color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
+      background: linear-gradient(
+        120deg,
+        #000,
+        #120000,
+        #000
+      );
+      background-size: 300% 300%;
+      animation: waveBG 18s ease infinite;
+    }
+
+    @keyframes waveBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     a {
@@ -40,7 +53,6 @@
       opacity: 0.8;
     }
 
-    /* Layout */
     .container {
       max-width: 1100px;
       margin: 0 auto;
@@ -49,7 +61,7 @@
 
     section {
       margin-bottom: 5rem;
-      animation: fadeUp 0.8s ease both;
+      animation: fadeUp 0.9s ease both;
     }
 
     h1, h2 {
@@ -71,7 +83,7 @@
 
     p {
       color: var(--muted);
-      max-width: 750px;
+      max-width: 760px;
     }
 
     /* Hero */
@@ -85,7 +97,7 @@
       color: var(--red);
     }
 
-    /* Cards */
+    /* Grid Cards */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -102,7 +114,7 @@
 
     .card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(225, 6, 0, 0.15);
+      box-shadow: 0 20px 40px rgba(225, 6, 0, 0.18);
     }
 
     .card h3 {
@@ -118,7 +130,7 @@
       color: var(--red);
     }
 
-    /* Links */
+    /* Pills */
     .links {
       display: flex;
       flex-wrap: wrap;
@@ -126,11 +138,12 @@
     }
 
     .pill {
-      padding: 0.6rem 1.2rem;
+      padding: 0.55rem 1.15rem;
       border-radius: 999px;
       background: #141414;
       border: 1px solid #222;
       transition: all 0.25s ease;
+      font-size: 0.85rem;
     }
 
     .pill:hover {
@@ -138,7 +151,23 @@
       color: black;
     }
 
-    /* Footer */
+    /* Skills */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 1rem;
+    }
+
+    .skill {
+      padding: 0.4rem 0.7rem;
+      border-radius: 999px;
+      background: #141414;
+      border: 1px solid #222;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
     footer {
       text-align: center;
       padding: 2rem;
@@ -146,7 +175,6 @@
       font-size: 0.9rem;
     }
 
-    /* Animations */
     @keyframes fadeUp {
       from {
         opacity: 0;
@@ -168,12 +196,24 @@
       <div>
         <h1>Roey <span>Yu</span></h1>
         <p>
-          Kinesiology student. Rehab & physiotherapy assistant. Photographer and melomaniac. 
+          Kinesiology student. Rehab & physiotherapy assistant. Photographer and melomaniac.
         </p>
       </div>
     </section>
 
-    <!-- PERSONAL LINKS -->
+    <!-- PROFESSIONAL -->
+    <section>
+      <h2>Professional</h2>
+      <div class="links">
+        <a class="pill" href="https://www.linkedin.com/in/roey-yu-853a39260/?originalSubdomain=ca" target="_blank">LinkedIn</a>
+        <a class="pill" href="https://www.instagram.com/_roeyyu_/" target="_blank">Instagram</a>
+        <a class="pill" href="https://www.instagram.com/roeyu_an/" target="_blank">Photography IG</a>
+        <a class="pill" href="mailto:yuroey@gmail.com">Email</a>
+        <span class="pill">587-225-4225</span>
+      </div>
+    </section>
+
+    <!-- PERSONAL -->
     <section>
       <h2>Personal</h2>
       <div class="links">
@@ -193,18 +233,23 @@
       <div class="grid">
         <div class="card">
           <h3>Stroke Rehabilitation Presentation</h3>
-          <p>MCA group presentation exploring stroke pathology, recovery pathways, and rehabilitation strategies.</p>
+          <p>MCA presentation exploring stroke pathology, recovery pathways, and rehabilitation implications.</p>
           <span class="tag">MCA</span>
         </div>
         <div class="card">
           <h3>Aspirin Synthesis & Caffeine Analysis</h3>
-          <p>OCEM laboratory project involving synthesis, purification, and analytical verification of aspirin and caffeine.</p>
+          <p>OCEM laboratory synthesis, purification, and analytical verification using TLC.</p>
           <span class="tag">OCEM</span>
         </div>
         <div class="card">
           <h3>Hands-On Cadaver Lab</h3>
-          <p>Applied anatomical exploration emphasizing musculoskeletal structures and functional relevance.</p>
+          <p>Applied anatomical exploration emphasizing musculoskeletal and functional relevance.</p>
           <span class="tag">Anatomy</span>
+        </div>
+        <div class="card">
+          <h3>SymmetryU Ergoline Presentation</h3>
+          <p>Presentation on ergoline compounds, pharmacological mechanisms, and PPO-IC context.</p>
+          <span class="tag">SymmetryU</span>
         </div>
       </div>
     </section>
@@ -215,31 +260,34 @@
       <div class="grid">
         <div class="card">
           <h3>Crunch Fitness</h3>
-          <p>
-            Professional in-person fitness consultations, InBody scan analysis, and personal training.
-          </p>
+          <p>In-person fitness consultations, InBody scan analysis, and personal training.</p>
         </div>
         <div class="card">
           <h3>AST Physiotherapy</h3>
-          <p>
-            Clinical physiotherapy assistant supporting laser therapy, ART, acupuncture, manual therapy, and chiropractic care.
-          </p>
+          <p>Clinical assistant supporting laser therapy, ART, acupuncture, MT, and chiropractic care.</p>
         </div>
         <div class="card">
           <h3>UofC Rehab Volunteer</h3>
-          <p>
-            Guided individualized rehab sessions with diverse populations.
-          </p>
+          <p>Guided individualized rehab sessions with diverse populations.</p>
         </div>
+      </div>
+
+      <div class="skills">
+        <span class="skill">Client Assessment</span>
+        <span class="skill">Laser Therapy</span>
+        <span class="skill">ART & IFC</span>
+        <span class="skill">Manual Therapy Support</span>
+        <span class="skill">InBody Analysis</span>
+        <span class="skill">Rehabilitation Assistance</span>
+        <span class="skill">Clear Communication</span>
+        <span class="skill">Professional Conduct</span>
       </div>
     </section>
 
     <!-- PROJECTS / RESUME -->
     <section>
       <h2>Projects & Resume</h2>
-      <p>
-        This space is intentionally quiet for now. New work will land here soon.
-      </p>
+      <p>This space is intentionally quiet for now. New work will land here soon.</p>
     </section>
 
   </div>
