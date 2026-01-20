@@ -12,10 +12,11 @@
     :root {
       --bg-deep: #05060b;
       --bg-mid: #0b1020;
-      --card: rgba(15, 18, 35, 0.75);
+      --card: rgba(15, 18, 35, 0.78);
       --accent: #8aa2ff;
       --text: #eef1ff;
       --muted: #9aa3d1;
+      --border: rgba(255,255,255,0.08);
     }
 
     * {
@@ -27,7 +28,7 @@
     body {
       font-family: 'Inter', sans-serif;
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.65;
       overflow-x: hidden;
       background:
         radial-gradient(circle at 20% 10%, #1a2040 0%, transparent 40%),
@@ -46,9 +47,9 @@
         radial-gradient(1px 1px at 70% 30%, #fff, transparent),
         radial-gradient(1px 1px at 90% 60%, #fff, transparent),
         radial-gradient(1px 1px at 25% 50%, #fff, transparent);
-      background-size: 300px 300px;
+      background-size: 320px 320px;
       animation: stars 120s linear infinite;
-      opacity: 0.4;
+      opacity: 0.35;
       z-index: -2;
     }
 
@@ -57,31 +58,23 @@
       to { transform: translateY(-1000px); }
     }
 
-    /* ===== ABSTRACT NEBULA SHAPES ===== */
+    /* ===== NEBULA ===== */
     .nebula {
       position: fixed;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(138,162,255,0.25), transparent 70%);
-      filter: blur(80px);
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, rgba(138,162,255,0.28), transparent 70%);
+      filter: blur(90px);
       z-index: -1;
-      animation: float 30s ease-in-out infinite alternate;
+      animation: float 32s ease-in-out infinite alternate;
     }
 
-    .nebula.one {
-      top: 10%;
-      left: -10%;
-    }
-
-    .nebula.two {
-      bottom: 5%;
-      right: -15%;
-      animation-duration: 40s;
-    }
+    .nebula.one { top: 8%; left: -12%; }
+    .nebula.two { bottom: 6%; right: -16%; animation-duration: 42s; }
 
     @keyframes float {
-      from { transform: translateY(0) translateX(0); }
-      to { transform: translateY(-60px) translateX(40px); }
+      from { transform: translate(0,0); }
+      to { transform: translate(50px,-60px); }
     }
 
     a {
@@ -94,11 +87,23 @@
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 2.5rem 5rem;
+      padding: 0 2.5rem 6rem;
+    }
+
+    /* ===== SCROLL FADE ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     section {
-      margin-bottom: 6rem;
+      margin-bottom: 7rem;
     }
 
     h1, h2 {
@@ -107,19 +112,20 @@
     }
 
     h1 {
-      font-size: 3.8rem;
+      font-size: 3.9rem;
       margin-bottom: 1.2rem;
     }
 
     h2 {
-      font-size: 1.9rem;
-      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      margin-bottom: 1.8rem;
       color: var(--accent);
     }
 
     p {
       color: var(--muted);
       max-width: 720px;
+      font-size: 0.98rem;
     }
 
     /* ===== HERO ===== */
@@ -127,43 +133,52 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
       position: relative;
     }
 
     .hero-inner {
-      max-width: 720px;
-      padding: 2.5rem;
-      background: rgba(5, 8, 25, 0.6);
-      backdrop-filter: blur(12px);
-      border-radius: 22px;
+      max-width: 760px;
+      padding: 3rem;
+      background: rgba(6, 9, 28, 0.65);
+      backdrop-filter: blur(14px);
+      border-radius: 26px;
+      border: 1px solid var(--border);
       margin-left: 4rem;
     }
 
     .hero-inner p {
-      color: #c6ccff;
+      color: #c9d0ff;
+      font-size: 1.05rem;
     }
 
     .scroll-btn {
       position: absolute;
-      bottom: 50px;
+      bottom: 55px;
       left: 4rem;
-      padding: 0.7rem 1.4rem;
+      padding: 0.7rem 1.5rem;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(10,12,30,0.6);
+      background: rgba(10,12,30,0.65);
       color: var(--text);
       font-size: 0.85rem;
       cursor: pointer;
       backdrop-filter: blur(8px);
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease;
     }
 
     .scroll-btn:hover {
       transform: translateY(-4px);
     }
 
-    /* ===== OFFSET SECTIONS ===== */
+    /* ===== SECTION WRAPPERS ===== */
+    .section-box {
+      background: rgba(8, 11, 30, 0.55);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 3rem;
+      backdrop-filter: blur(12px);
+    }
+
     .offset-left { margin-left: 3rem; }
     .offset-right { margin-left: auto; margin-right: 3rem; }
 
@@ -171,20 +186,29 @@
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
+      gap: 2.2rem;
     }
 
     .card {
       background: var(--card);
-      padding: 1.9rem;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.08);
+      padding: 2rem;
+      border-radius: 22px;
+      border: 1px solid var(--border);
       backdrop-filter: blur(10px);
       transition: transform 0.35s ease;
     }
 
     .card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-6px);
+    }
+
+    .card h3 {
+      margin-bottom: 0.4rem;
+      font-size: 1.05rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
     }
 
     /* ===== LINKS ===== */
@@ -195,7 +219,7 @@
     }
 
     .pill {
-      padding: 0.45rem 0.95rem;
+      padding: 0.5rem 1rem;
       border-radius: 999px;
       background: rgba(10,12,30,0.6);
       border: 1px solid rgba(255,255,255,0.15);
@@ -207,11 +231,11 @@
       display: flex;
       flex-wrap: wrap;
       gap: 0.6rem;
-      margin-top: 1.5rem;
+      margin-top: 1.6rem;
     }
 
     .skill {
-      padding: 0.4rem 0.7rem;
+      padding: 0.45rem 0.8rem;
       border-radius: 999px;
       background: rgba(10,12,30,0.6);
       border: 1px solid rgba(255,255,255,0.12);
@@ -221,7 +245,7 @@
 
     footer {
       text-align: center;
-      padding: 2rem;
+      padding: 2.5rem;
       color: #aab1ff;
       font-size: 0.85rem;
     }
@@ -230,14 +254,13 @@
 
 <body>
 
-  <!-- ABSTRACT SPACE SHAPES -->
   <div class="nebula one"></div>
   <div class="nebula two"></div>
 
   <div class="container">
 
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero reveal">
       <div class="hero-inner">
         <h1>Roey Yu</h1>
         <p>
@@ -251,65 +274,86 @@
     </section>
 
     <!-- PROFESSIONAL -->
-    <section id="professional" class="offset-left">
-      <h2>Professional</h2>
-      <div class="links">
-        <a class="pill" href="https://www.linkedin.com/in/roey-yu-853a39260/" target="_blank">LinkedIn</a>
-        <a class="pill" href="https://www.instagram.com/_roeyyu_/" target="_blank">Instagram</a>
-        <span class="pill">yuroey@gmail.com</span>
-        <span class="pill">587-225-4225</span>
+    <section id="professional" class="offset-left reveal">
+      <div class="section-box">
+        <h2>Professional</h2>
+        <div class="links">
+          <a class="pill" href="https://www.linkedin.com/in/roey-yu-853a39260/" target="_blank">LinkedIn</a>
+          <a class="pill" href="https://www.instagram.com/_roeyyu_/" target="_blank">Instagram</a>
+          <span class="pill">yuroey@gmail.com</span>
+          <span class="pill">587-225-4225</span>
+        </div>
       </div>
     </section>
 
     <!-- PERSONAL -->
-    <section class="offset-right">
-      <h2>Personal</h2>
-      <div class="links">
-        <a class="pill" href="https://open.spotify.com/user/4788p79ms20bt70l3z34es18t" target="_blank">Spotify</a>
-        <a class="pill" href="https://letterboxd.com/roeyu/" target="_blank">Letterboxd</a> 
-        <a class="pill" href="https://steamcommunity.com/profiles/76561199225402800/" target="_blank">Steam</a> 
-        <a class="pill" href="https://www.twitch.tv/oroeyo" target="_blank">Twitch</a> 
-        <a class="pill" href="https://myanimelist.net/animelist/roeyo" target="_blank">Anime</a> 
-        <a class="pill" href="https://minesweeper.online/player/9797373" target="_blank">Sweeping</a> 
-        <a class="pill" href="https://wank.wavu.wiki/player/5ANMm5Nihg8h?graph=sess" target="_blank">T8</a> 
-        <a class="pill" href="https://www.instagram.com/roeyu_an/" target="_blank">Photography IG</a> 
-        <a class="pill" href="https://vsco.co/roeyyu/gallery" target="_blank">VSCO</a>
+    <section class="offset-right reveal">
+      <div class="section-box">
+        <h2>Personal</h2>
+        <div class="links">
+          <a class="pill" href="https://open.spotify.com/user/4788p79ms20bt70l3z34es18t" target="_blank">Spotify</a>
+          <a class="pill" href="https://letterboxd.com/roeyu/" target="_blank">Letterboxd</a>
+          <a class="pill" href="https://steamcommunity.com/profiles/76561199225402800/" target="_blank">Steam</a>
+          <a class="pill" href="https://www.twitch.tv/oroeyo" target="_blank">Twitch</a>
+          <a class="pill" href="https://myanimelist.net/animelist/roeyo" target="_blank">Anime</a>
+          <a class="pill" href="https://minesweeper.online/player/9797373" target="_blank">Sweeping</a>
+          <a class="pill" href="https://wank.wavu.wiki/player/5ANMm5Nihg8h?graph=sess" target="_blank">T8</a>
+          <a class="pill" href="https://www.instagram.com/roeyu_an/" target="_blank">Photography IG</a>
+          <a class="pill" href="https://vsco.co/roeyyu/gallery" target="_blank">VSCO</a>
+        </div>
       </div>
     </section>
 
     <!-- ACADEMICS -->
-    <section class="offset-left">
-      <h2>Academic Work</h2>
-      <div class="grid">
-        <div class="card"><h3>Stroke Rehab (MCA)</h3><p>Pathology, recovery, and rehabilitation strategy.</p></div>
-        <div class="card"><h3>Aspirin & Caffeine</h3><p>OCEM synthesis, purification, TLC analysis.</p></div>
-        <div class="card"><h3>Cadaver Lab</h3><p>Applied musculoskeletal anatomy.</p></div>
-        <div class="card"><h3>SymmetryU Ergoline</h3><p>Pharmacology and PPO-IC context.</p></div>
+    <section class="offset-left reveal">
+      <div class="section-box">
+        <h2>Academic Work</h2>
+        <div class="grid">
+          <div class="card"><h3>Stroke Rehab (MCA)</h3><p>Pathology, recovery, and rehabilitation strategy.</p></div>
+          <div class="card"><h3>Aspirin & Caffeine</h3><p>OCEM synthesis, purification, TLC analysis.</p></div>
+          <div class="card"><h3>Cadaver Lab</h3><p>Applied musculoskeletal anatomy.</p></div>
+          <div class="card"><h3>SymmetryU Ergoline</h3><p>Pharmacology and PPO-IC context.</p></div>
+        </div>
       </div>
     </section>
 
     <!-- EXPERIENCE -->
-    <section class="offset-right">
-      <h2>Experience</h2>
-      <div class="grid">
-        <div class="card"><h3>Crunch Fitness</h3><p>Consultations, InBody analysis, personal training.</p></div>
-        <div class="card"><h3>AST Physiotherapy</h3><p>Laser, ART, acupuncture, MT, chiropractic support.</p></div>
-        <div class="card"><h3>UofC Rehab Volunteer</h3><p>Individualized rehab sessions.</p></div>
-      </div>
+    <section class="offset-right reveal">
+      <div class="section-box">
+        <h2>Experience</h2>
+        <div class="grid">
+          <div class="card"><h3>Crunch Fitness</h3><p>Consultations, InBody analysis, personal training.</p></div>
+          <div class="card"><h3>AST Physiotherapy</h3><p>Laser, ART, acupuncture, MT, chiropractic support.</p></div>
+          <div class="card"><h3>UofC Rehab Volunteer</h3><p>Individualized rehab sessions.</p></div>
+        </div>
 
-      <div class="skills">
-        <span class="skill">Client Assessment</span>
-        <span class="skill">Laser Therapy</span>
-        <span class="skill">ART & IFC</span>
-        <span class="skill">InBody Analysis</span>
-        <span class="skill">Rehab Assistance</span>
-        <span class="skill">Professional Communication</span>
+        <div class="skills">
+          <span class="skill">Client Assessment</span>
+          <span class="skill">Laser Therapy</span>
+          <span class="skill">ART & IFC</span>
+          <span class="skill">InBody Analysis</span>
+          <span class="skill">Rehab Assistance</span>
+          <span class="skill">Professional Communication</span>
+        </div>
       </div>
     </section>
 
   </div>
 
   <footer>© 2025 Roey Yu</footer>
+
+  <script>
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          entry.target.classList.toggle('active', entry.isIntersecting);
+        });
+      },
+      { threshold: 0.35 }
+    );
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
