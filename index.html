@@ -10,13 +10,12 @@
 
   <style>
     :root {
-      --green-dark: #0f1f17;
-      --green: #1f3d2b;
-      --sky: #7fb1c9;
-      --card: rgba(15, 25, 20, 0.85);
-      --accent: #8fd3a7;
-      --text: #eef6f1;
-      --muted: #a8c3b3;
+      --bg-deep: #05060b;
+      --bg-mid: #0b1020;
+      --card: rgba(15, 18, 35, 0.75);
+      --accent: #8aa2ff;
+      --text: #eef1ff;
+      --muted: #9aa3d1;
     }
 
     * {
@@ -30,50 +29,59 @@
       color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
-      background: linear-gradient(
-        to bottom,
-        var(--sky) 0%,
-        #9cc9dc 30%,
-        var(--green) 60%,
-        var(--green-dark) 100%
-      );
-    }
-
-    /* ===== CLOUD LAYER ===== */
-    .clouds {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
       background:
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.35) 0 120px, transparent 140px),
-        radial-gradient(circle at 60% 30%, rgba(255,255,255,0.25) 0 160px, transparent 190px),
-        radial-gradient(circle at 80% 10%, rgba(255,255,255,0.2) 0 100px, transparent 130px);
-      animation: cloudsMove 90s linear infinite;
+        radial-gradient(circle at 20% 10%, #1a2040 0%, transparent 40%),
+        radial-gradient(circle at 80% 30%, #24144a 0%, transparent 45%),
+        linear-gradient(to bottom, var(--bg-mid), var(--bg-deep));
     }
 
-    @keyframes cloudsMove {
-      from { background-position: 0 0; }
-      to { background-position: -2000px 0; }
-    }
-
-    /* ===== BREEZE LAYER ===== */
-    .breeze {
+    /* ===== STARFIELD ===== */
+    body::before {
+      content: "";
       position: fixed;
       inset: 0;
-      z-index: -1;
-      background: repeating-linear-gradient(
-        -10deg,
-        rgba(255,255,255,0.03),
-        rgba(255,255,255,0.03) 2px,
-        transparent 2px,
-        transparent 14px
-      );
-      animation: breeze 25s linear infinite;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, #fff, transparent),
+        radial-gradient(1px 1px at 40% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 70% 30%, #fff, transparent),
+        radial-gradient(1px 1px at 90% 60%, #fff, transparent),
+        radial-gradient(1px 1px at 25% 50%, #fff, transparent);
+      background-size: 300px 300px;
+      animation: stars 120s linear infinite;
+      opacity: 0.4;
+      z-index: -2;
     }
 
-    @keyframes breeze {
-      from { background-position: 0 0; }
-      to { background-position: 600px 300px; }
+    @keyframes stars {
+      from { transform: translateY(0); }
+      to { transform: translateY(-1000px); }
+    }
+
+    /* ===== ABSTRACT NEBULA SHAPES ===== */
+    .nebula {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(138,162,255,0.25), transparent 70%);
+      filter: blur(80px);
+      z-index: -1;
+      animation: float 30s ease-in-out infinite alternate;
+    }
+
+    .nebula.one {
+      top: 10%;
+      left: -10%;
+    }
+
+    .nebula.two {
+      bottom: 5%;
+      right: -15%;
+      animation-duration: 40s;
+    }
+
+    @keyframes float {
+      from { transform: translateY(0) translateX(0); }
+      to { transform: translateY(-60px) translateX(40px); }
     }
 
     a {
@@ -86,7 +94,7 @@
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 2rem 5rem;
+      padding: 0 2.5rem 5rem;
     }
 
     section {
@@ -99,8 +107,8 @@
     }
 
     h1 {
-      font-size: 3.6rem;
-      margin-bottom: 1rem;
+      font-size: 3.8rem;
+      margin-bottom: 1.2rem;
     }
 
     h2 {
@@ -119,39 +127,45 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: center;
-      text-align: center;
+      justify-content: flex-start;
       position: relative;
     }
 
     .hero-inner {
-      max-width: 800px;
+      max-width: 720px;
+      padding: 2.5rem;
+      background: rgba(5, 8, 25, 0.6);
+      backdrop-filter: blur(12px);
+      border-radius: 22px;
+      margin-left: 4rem;
+    }
+
+    .hero-inner p {
+      color: #c6ccff;
     }
 
     .scroll-btn {
       position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
+      bottom: 50px;
+      left: 4rem;
       padding: 0.7rem 1.4rem;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.3);
-      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(10,12,30,0.6);
       color: var(--text);
       font-size: 0.85rem;
       cursor: pointer;
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(8px);
       transition: all 0.3s ease;
     }
 
     .scroll-btn:hover {
-      transform: translateX(-50%) translateY(-4px);
-      background: rgba(0,0,0,0.35);
+      transform: translateY(-4px);
     }
 
     /* ===== OFFSET SECTIONS ===== */
-    .offset-left { margin-left: 4rem; }
-    .offset-right { margin-left: auto; margin-right: 4rem; }
+    .offset-left { margin-left: 3rem; }
+    .offset-right { margin-left: auto; margin-right: 3rem; }
 
     /* ===== GRID ===== */
     .grid {
@@ -162,28 +176,28 @@
 
     .card {
       background: var(--card);
-      padding: 1.8rem;
-      border-radius: 18px;
+      padding: 1.9rem;
+      border-radius: 20px;
       border: 1px solid rgba(255,255,255,0.08);
       backdrop-filter: blur(10px);
       transition: transform 0.35s ease;
     }
 
     .card:hover {
-      transform: translateY(-8px) rotate(-0.3deg);
+      transform: translateY(-8px);
     }
 
     /* ===== LINKS ===== */
     .links {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.8rem;
+      gap: 0.9rem;
     }
 
     .pill {
-      padding: 0.45rem 0.9rem;
+      padding: 0.45rem 0.95rem;
       border-radius: 999px;
-      background: rgba(0,0,0,0.25);
+      background: rgba(10,12,30,0.6);
       border: 1px solid rgba(255,255,255,0.15);
       font-size: 0.75rem;
     }
@@ -199,7 +213,7 @@
     .skill {
       padding: 0.4rem 0.7rem;
       border-radius: 999px;
-      background: rgba(0,0,0,0.25);
+      background: rgba(10,12,30,0.6);
       border: 1px solid rgba(255,255,255,0.12);
       font-size: 0.7rem;
       color: var(--muted);
@@ -208,7 +222,7 @@
     footer {
       text-align: center;
       padding: 2rem;
-      color: #cfe3d7;
+      color: #aab1ff;
       font-size: 0.85rem;
     }
   </style>
@@ -216,9 +230,9 @@
 
 <body>
 
-  <!-- BACKGROUND LAYERS -->
-  <div class="clouds"></div>
-  <div class="breeze"></div>
+  <!-- ABSTRACT SPACE SHAPES -->
+  <div class="nebula one"></div>
+  <div class="nebula two"></div>
 
   <div class="container">
 
