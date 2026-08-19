@@ -1,359 +1,611 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Roey Yu | Creative Portfolio</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Roey A. Yu — Kinesiology · Rehab · Photography · Tekken</title>
+<meta name="description" content="Roey A. Yu — BSc Kinesiology, clinical rehab assistant, researcher, photographer, and competitive Tekken player." />
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --bg-deep: #05060b;
-      --bg-mid: #0b1020;
-      --card: rgba(15, 18, 35, 0.78);
-      --accent: #8aa2ff;
-      --text: #eef1ff;
-      --muted: #9aa3d1;
-      --border: rgba(255,255,255,0.08);
-    }
+<style>
+  :root{
+    --ink:#0d1210;
+    --ink-2:#141b18;
+    --paper:#efe7d8;
+    --paper-dim:#c9c2b2;
+    --line:#8faa93;
+    --line-dim:#3c4a41;
+    --accent:#e8542e;
+    --accent-2:#7fa98e;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+    --disp: 'Big Shoulders Display', sans-serif;
+    --spine-x: 48px;
+  }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  *{ margin:0; padding:0; box-sizing:border-box; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      color: var(--text);
-      line-height: 1.65;
-      overflow-x: hidden;
-      background:
-        radial-gradient(circle at 20% 10%, #1a2040 0%, transparent 40%),
-        radial-gradient(circle at 80% 30%, #24144a 0%, transparent 45%),
-        linear-gradient(to bottom, var(--bg-mid), var(--bg-deep));
-    }
+  html{ scroll-behavior:smooth; }
 
-    /* ===== STARFIELD ===== */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(1px 1px at 10% 20%, #fff, transparent),
-        radial-gradient(1px 1px at 40% 80%, #fff, transparent),
-        radial-gradient(1px 1px at 70% 30%, #fff, transparent),
-        radial-gradient(1px 1px at 90% 60%, #fff, transparent),
-        radial-gradient(1px 1px at 25% 50%, #fff, transparent);
-      background-size: 320px 320px;
-      animation: stars 120s linear infinite;
-      opacity: 0.35;
-      z-index: -2;
-    }
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--sans);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
 
-    @keyframes stars {
-      from { transform: translateY(0); }
-      to { transform: translateY(-1000px); }
-    }
+  ::selection{ background:var(--accent); color:var(--ink); }
 
-    /* ===== NEBULA ===== */
-    .nebula {
-      position: fixed;
-      width: 520px;
-      height: 520px;
-      background: radial-gradient(circle, rgba(138,162,255,0.28), transparent 70%);
-      filter: blur(90px);
-      z-index: -1;
-      animation: float 32s ease-in-out infinite alternate;
-    }
+  a{ color:inherit; text-decoration:none; }
 
-    .nebula.one { top: 8%; left: -12%; }
-    .nebula.two { bottom: 6%; right: -16%; animation-duration: 42s; }
+  /* ============ GRAIN + VIGNETTE ============ */
+  .grain{
+    position:fixed; inset:0; z-index:1; pointer-events:none;
+    opacity:.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .vignette{
+    position:fixed; inset:0; z-index:1; pointer-events:none;
+    background:radial-gradient(ellipse at 50% 40%, transparent 40%, rgba(0,0,0,.55) 100%);
+  }
 
-    @keyframes float {
-      from { transform: translate(0,0); }
-      to { transform: translate(50px,-60px); }
-    }
+  /* ============ SPINE ============ */
+  .spine-track{
+    position:fixed; top:0; bottom:0; left:var(--spine-x);
+    width:2px; background:var(--line-dim); z-index:5;
+  }
+  .spine-fill{
+    position:absolute; top:0; left:0; width:100%; height:0%;
+    background:linear-gradient(var(--accent), var(--line));
+    box-shadow:0 0 12px var(--accent);
+    transition:height .08s linear;
+  }
+  .spine-pulse{
+    position:absolute; left:50%; width:9px; height:9px; border-radius:50%;
+    background:var(--accent); transform:translate(-50%,-50%);
+    box-shadow:0 0 14px 3px var(--accent);
+  }
+  @media (max-width:820px){
+    .spine-track{ left:20px; }
+    :root{ --spine-x:20px; }
+  }
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
+  /* ============ NAV DOTS ============ */
+  .vertebra{
+    position:absolute; left:var(--spine-x); width:15px; height:15px;
+    border-radius:50%; background:var(--ink); border:2px solid var(--line-dim);
+    transform:translate(-50%,-50%); z-index:6; transition:border-color .4s, background .4s, box-shadow .4s;
+  }
+  .vertebra.lit{ border-color:var(--accent); background:var(--accent); box-shadow:0 0 16px var(--accent); }
 
-    a:hover { opacity: 0.85; }
+  /* ============ LAYOUT ============ */
+  .wrap{ position:relative; z-index:2; padding-left:calc(var(--spine-x) + 46px); padding-right:6vw; }
+  @media (max-width:820px){ .wrap{ padding-left:56px; padding-right:6vw; } }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2.5rem 6rem;
-    }
+  section{ position:relative; padding:9rem 0; }
+  section:first-of-type{ padding-top:0; }
 
-    /* ===== SCROLL FADE ===== */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
+  .eyebrow{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--accent-2); display:flex; align-items:center; gap:.6rem; margin-bottom:1.1rem;
+  }
+  .eyebrow::before{ content:""; width:26px; height:1px; background:var(--accent-2); }
 
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  h1,h2,h3{ font-family:var(--disp); font-weight:700; letter-spacing:.01em; }
 
-    section {
-      margin-bottom: 7rem;
-    }
+  h2{
+    font-size:clamp(2.1rem, 5vw, 3.4rem);
+    text-transform:uppercase;
+    line-height:.98;
+    margin-bottom:2.6rem;
+    color:var(--paper);
+  }
 
-    h1, h2 {
-      font-family: 'Playfair Display', serif;
-      letter-spacing: 0.4px;
-    }
+  p{ color:var(--paper-dim); max-width:640px; font-size:.98rem; }
 
-    h1 {
-      font-size: 3.9rem;
-      margin-bottom: 1.2rem;
-    }
+  /* ============ REVEAL ============ */
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease; }
+  .reveal.active{ opacity:1; transform:translateY(0); }
 
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 1.8rem;
-      color: var(--accent);
-    }
+  /* ============ HERO ============ */
+  .hero{
+    min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding-top:0;
+    position:relative; overflow:hidden;
+  }
+  .hero-gait{
+    position:absolute; top:0; right:-6%; height:100%; width:60%; z-index:0; opacity:.5;
+    pointer-events:none;
+  }
+  .hero-kicker{
+    font-family:var(--mono); font-size:.78rem; letter-spacing:.3em; text-transform:uppercase;
+    color:var(--accent); margin-bottom:1.4rem;
+  }
+  h1.name{
+    font-size:clamp(3.2rem, 10vw, 7.4rem); line-height:.9; text-transform:uppercase;
+    color:var(--paper);
+  }
+  h1.name span{ color:transparent; -webkit-text-stroke:1.5px var(--paper); display:block; }
+  .hero-tags{
+    margin-top:2rem; display:flex; flex-wrap:wrap; gap:.6rem 1rem;
+    font-family:var(--mono); font-size:.82rem; color:var(--accent-2); max-width:640px;
+  }
+  .hero-tags span:not(:last-child)::after{ content:"·"; margin-left:1rem; color:var(--line-dim); }
+  .hero-loc{ margin-top:2.6rem; font-family:var(--mono); font-size:.78rem; color:var(--paper-dim); }
+  .scroll-cue{
+    position:absolute; bottom:3rem; left:calc(var(--spine-x) + 46px);
+    font-family:var(--mono); font-size:.7rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--paper-dim); display:flex; align-items:center; gap:.6rem;
+  }
+  .scroll-cue::after{
+    content:""; width:1px; height:34px; background:linear-gradient(var(--accent), transparent);
+    animation:cueMove 1.8s ease-in-out infinite;
+  }
+  @keyframes cueMove{ 0%,100%{ opacity:.2; } 50%{ opacity:1; } }
 
-    p {
-      color: var(--muted);
-      max-width: 720px;
-      font-size: 0.98rem;
-    }
+  /* ============ LINK PILLS ============ */
+  .linkgrid{ display:flex; flex-wrap:wrap; gap:.8rem; margin-top:1rem; }
+  .pill{
+    font-family:var(--mono); font-size:.78rem; padding:.62rem 1.15rem; border:1px solid var(--line-dim);
+    border-radius:999px; color:var(--paper-dim); transition:all .3s ease; background:rgba(255,255,255,.02);
+  }
+  .pill:hover{ border-color:var(--accent); color:var(--paper); background:rgba(232,84,46,.1); transform:translateY(-2px); }
 
-    /* ===== HERO ===== */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-    }
+  /* ============ CARDS ============ */
+  .grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:1.6rem; margin-top:1rem; }
+  .card{
+    position:relative; padding:1.9rem; border:1px solid var(--line-dim); border-radius:4px;
+    background:linear-gradient(160deg, rgba(127,169,142,.05), transparent 60%);
+    transition:transform .35s ease, border-color .35s ease;
+  }
+  .card:hover{ transform:translateY(-5px); border-color:var(--accent-2); }
+  .card .tag{ font-family:var(--mono); font-size:.68rem; color:var(--accent); letter-spacing:.14em; text-transform:uppercase; }
+  .card h3{ font-size:1.25rem; margin:.5rem 0 .6rem; text-transform:none; letter-spacing:0; font-weight:600; }
+  .card p{ font-size:.86rem; color:var(--paper-dim); }
 
-    .hero-inner {
-      max-width: 760px;
-      padding: 3rem;
-      background: rgba(6, 9, 28, 0.65);
-      backdrop-filter: blur(14px);
-      border-radius: 26px;
-      border: 1px solid var(--border);
-      margin-left: 4rem;
-    }
+  /* academic grid-paper bg */
+  #academic .section-bg{
+    position:absolute; inset:-2rem -2rem auto -2rem; height:110%; z-index:-1; opacity:.35;
+    background-image:linear-gradient(var(--line-dim) 1px, transparent 1px), linear-gradient(90deg, var(--line-dim) 1px, transparent 1px);
+    background-size:34px 34px;
+    mask-image:linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+  }
+  .sparkline{ position:absolute; right:0; top:2rem; width:44%; max-width:420px; opacity:.55; z-index:-1; }
 
-    .hero-inner p {
-      color: #c9d0ff;
-      font-size: 1.05rem;
-    }
+  /* ============ TIMELINE (experience) ============ */
+  .tl-item{
+    position:relative; padding:1.6rem 0 1.6rem 1.8rem; border-left:1px solid var(--line-dim);
+    margin-left:.2rem;
+  }
+  .tl-item::before{
+    content:""; position:absolute; left:-5px; top:1.9rem; width:9px; height:9px; border-radius:50%;
+    background:var(--ink); border:2px solid var(--accent-2);
+  }
+  .tl-role{ font-size:1.2rem; font-family:var(--disp); font-weight:700; color:var(--paper); text-transform:uppercase; }
+  .tl-org{ font-family:var(--mono); font-size:.78rem; color:var(--accent-2); margin:.2rem 0 .7rem; }
+  .tl-item ul{ list-style:none; padding:0; }
+  .tl-item li{ font-size:.88rem; color:var(--paper-dim); margin-bottom:.4rem; padding-left:1.1rem; position:relative; max-width:640px; }
+  .tl-item li::before{ content:"—"; position:absolute; left:0; color:var(--line-dim); }
 
-    .scroll-btn {
-      position: absolute;
-      bottom: 55px;
-      left: 4rem;
-      padding: 0.7rem 1.5rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(10,12,30,0.65);
-      color: var(--text);
-      font-size: 0.85rem;
-      cursor: pointer;
-      backdrop-filter: blur(8px);
-      transition: transform 0.3s ease;
-    }
+  /* ============ RESEARCH CALLOUT ============ */
+  .research-box{
+    border:1px solid var(--accent-2); border-radius:4px; padding:2.2rem; position:relative; overflow:hidden;
+    background:linear-gradient(120deg, rgba(127,169,142,.08), transparent);
+  }
+  .research-box::before{
+    content:""; position:absolute; inset:0; opacity:.12; pointer-events:none;
+    background:repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 26px);
+    animation:ekgshift 6s linear infinite;
+  }
+  @keyframes ekgshift{ from{ background-position-x:0; } to{ background-position-x:260px; } }
 
-    .scroll-btn:hover {
-      transform: translateY(-4px);
-    }
+  /* ============ PERSONAL / POLAROIDS ============ */
+  .polaroid{
+    background:var(--paper); color:var(--ink); padding:.7rem .7rem 1.4rem; border-radius:2px;
+    width:190px; box-shadow:0 14px 26px rgba(0,0,0,.4); transition:transform .4s ease;
+  }
+  .polaroid:hover{ transform:rotate(0deg) scale(1.04) !important; }
+  .polaroid .ph{ height:150px; border-radius:1px; overflow:hidden; position:relative; }
+  .polaroid figcaption{ font-family:var(--mono); font-size:.68rem; margin-top:.6rem; text-align:center; letter-spacing:.05em; }
+  .polaroid-row{ display:flex; gap:1.6rem; flex-wrap:wrap; margin:2.4rem 0 2.8rem; }
 
-    /* ===== SECTION WRAPPERS ===== */
-    .section-box {
-      background: rgba(8, 11, 30, 0.55);
-      border: 1px solid var(--border);
-      border-radius: 26px;
-      padding: 3rem;
-      backdrop-filter: blur(12px);
-    }
+  .vinyl{
+    width:120px; height:120px; border-radius:50%;
+    background:repeating-radial-gradient(circle, #1a1a1a 0 2px, #0a0a0a 2px 4px);
+    position:relative; animation:spin 5s linear infinite; flex-shrink:0;
+    border:1px solid var(--line-dim);
+  }
+  .vinyl::after{
+    content:""; position:absolute; inset:44%; border-radius:50%; background:var(--accent);
+  }
+  @keyframes spin{ from{ transform:rotate(0deg); } to{ transform:rotate(360deg); } }
 
-    .offset-left { margin-left: 3rem; }
-    .offset-right { margin-left: auto; margin-right: 3rem; }
+  /* ============ TEKKEN ARCADE ============ */
+  #tekken{
+    background:radial-gradient(ellipse at 50% 0%, rgba(232,84,46,.14), transparent 60%);
+    border-top:1px solid var(--line-dim); border-bottom:1px solid var(--line-dim);
+  }
+  .crt{
+    position:relative; border:1px solid var(--accent); border-radius:6px; padding:2.6rem;
+    background:linear-gradient(180deg, rgba(232,84,46,.06), rgba(0,0,0,.4));
+    overflow:hidden;
+  }
+  .crt::before{
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:.18;
+    background:repeating-linear-gradient(0deg, rgba(255,255,255,.5) 0 1px, transparent 1px 3px);
+  }
+  .rank-badge{
+    font-family:var(--disp); font-weight:800; font-size:clamp(1.7rem,4vw,2.6rem); text-transform:uppercase;
+    color:var(--accent); letter-spacing:.02em; text-shadow:0 0 18px rgba(232,84,46,.6);
+    animation:flicker 3.4s infinite;
+  }
+  @keyframes flicker{
+    0%,19%,21%,23%,25%,54%,56%,100%{ opacity:1; }
+    20%,24%,55%{ opacity:.62; }
+  }
+  .rank-sub{ font-family:var(--mono); font-size:.78rem; color:var(--paper-dim); margin-top:.6rem; }
+  .stat-row{ display:flex; gap:2.4rem; flex-wrap:wrap; margin-top:1.8rem; }
+  .stat{ font-family:var(--mono); }
+  .stat b{ display:block; font-size:1.5rem; color:var(--paper); font-family:var(--disp); }
+  .stat span{ font-size:.7rem; color:var(--paper-dim); letter-spacing:.1em; text-transform:uppercase; }
 
-    /* ===== GRID ===== */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2.2rem;
-    }
+  /* ============ SKILLS ============ */
+  .skillband{ display:flex; flex-wrap:wrap; gap:.55rem; margin-top:1rem; }
+  .skillchip{
+    font-family:var(--mono); font-size:.72rem; padding:.45rem .85rem; border:1px solid var(--line-dim);
+    color:var(--paper-dim); border-radius:2px;
+  }
+  .skillcat{ margin-bottom:1.8rem; }
+  .skillcat h4{ font-family:var(--mono); font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:var(--accent-2); margin-bottom:.7rem; }
 
-    .card {
-      background: var(--card);
-      padding: 2rem;
-      border-radius: 22px;
-      border: 1px solid var(--border);
-      backdrop-filter: blur(10px);
-      transition: transform 0.35s ease;
-    }
+  /* ============ CERTS ============ */
+  .cert-list{ list-style:none; margin-top:1rem; }
+  .cert-list li{
+    font-size:.9rem; color:var(--paper-dim); padding:.75rem 0; border-bottom:1px solid var(--line-dim);
+    display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+  }
+  .cert-list b{ color:var(--paper); font-weight:500; }
+  .cert-list em{ font-family:var(--mono); font-style:normal; font-size:.76rem; color:var(--accent-2); }
 
-    .card:hover {
-      transform: translateY(-6px);
-    }
+  /* ============ FOOTER ============ */
+  footer{
+    padding:5rem 0 4rem; text-align:left; border-top:1px solid var(--line-dim);
+  }
+  footer .fname{ font-family:var(--disp); font-size:2.2rem; text-transform:uppercase; color:var(--paper); }
+  footer p{ margin-top:.6rem; }
 
-    .card h3 {
-      margin-bottom: 0.4rem;
-      font-size: 1.05rem;
-    }
-
-    .card p {
-      font-size: 0.9rem;
-    }
-
-    /* ===== LINKS ===== */
-    .links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.9rem;
-    }
-
-    .pill {
-      padding: 0.5rem 1rem;
-      border-radius: 999px;
-      background: rgba(10,12,30,0.6);
-      border: 1px solid rgba(255,255,255,0.15);
-      font-size: 0.75rem;
-    }
-
-    /* ===== SKILLS ===== */
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-top: 1.6rem;
-    }
-
-    .skill {
-      padding: 0.45rem 0.8rem;
-      border-radius: 999px;
-      background: rgba(10,12,30,0.6);
-      border: 1px solid rgba(255,255,255,0.12);
-      font-size: 0.7rem;
-      color: var(--muted);
-    }
-
-    footer {
-      text-align: center;
-      padding: 2.5rem;
-      color: #aab1ff;
-      font-size: 0.85rem;
-    }
-  </style>
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
 </head>
-
 <body>
 
-  <div class="nebula one"></div>
-  <div class="nebula two"></div>
+<div class="grain"></div>
+<div class="vignette"></div>
 
-  <div class="container">
+<div class="spine-track">
+  <div class="spine-fill" id="spineFill"></div>
+</div>
 
-    <!-- HERO -->
-    <section class="hero reveal">
-      <div class="hero-inner">
-        <h1>Roey Yu</h1>
-        <p>
-          Bachelors of Science in Kinesiology | Specialization in Exercise and Health Physiology | Rehab and Physio | Photographer and Melomaniac | Tekken King
-        </p>
+<div class="wrap">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="hero">
+    <svg class="hero-gait" viewBox="0 0 300 500" preserveAspectRatio="xMidYMid meet">
+      <g stroke="var(--line-dim)" stroke-width="1" fill="none" opacity=".8">
+        <path d="M150 40 Q 90 180 150 260 Q 210 340 150 460" />
+      </g>
+      <circle id="gaitDot" r="5" fill="var(--accent)">
+        <animateMotion dur="4s" repeatCount="indefinite"
+          path="M150 40 Q 90 180 150 260 Q 210 340 150 460" />
+      </circle>
+      <g stroke="var(--line-dim)" stroke-width="1" opacity=".5">
+        <line x1="60" y1="120" x2="240" y2="120"/>
+        <line x1="60" y1="230" x2="240" y2="230"/>
+        <line x1="60" y1="340" x2="240" y2="340"/>
+      </g>
+    </svg>
+
+    <div class="hero-kicker">Kinesiology · Rehabilitation · Photography</div>
+    <h1 class="name">Roey<br><span>A. Yu</span></h1>
+    <div class="hero-tags">
+      <span>BSc Kinesiology — EXHP</span>
+      <span>Clinical Rehab Assistant</span>
+      <span>Research Assistant</span>
+      <span>Photographer</span>
+      <span>Melomaniac</span>
+      <span>God of Destruction I</span>
+    </div>
+    <div class="hero-loc">Calgary, Alberta · yuroey@gmail.com · (587) 225-4225</div>
+    <div class="scroll-cue">Follow the spine</div>
+  </section>
+
+  <!-- ================= PROFESSIONAL ================= -->
+  <section id="professional" class="reveal">
+    <div class="eyebrow">01 — Contact</div>
+    <h2>Professional</h2>
+    <p>For clinical, research, or work inquiries.</p>
+    <div class="linkgrid">
+      <a class="pill" href="https://www.linkedin.com/in/roey-yu-853a39260/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="pill" href="https://www.instagram.com/_roeyyu_/" target="_blank" rel="noopener">Instagram ↗</a>
+      <a class="pill" href="mailto:yuroey@gmail.com">yuroey@gmail.com</a>
+      <span class="pill">587 · 225 · 4225</span>
+    </div>
+  </section>
+
+  <!-- ================= EDUCATION / ACADEMIC ================= -->
+  <section id="academic" class="reveal">
+    <div class="section-bg"></div>
+    <div class="eyebrow">02 — Education</div>
+    <h2>Academic Work</h2>
+    <p>Bachelor of Science, Kinesiology — Specialization in Exercise &amp; Health Physiology (EXHP), University of Calgary. Expected May 2027.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="tag">KNES351</div>
+        <h3>Stroke Pathology</h3>
+        <p>Presented on MCA ischemic stroke pathology in the dorsal column–medial lemniscus tract and its clinical applications.</p>
       </div>
+      <div class="card">
+        <div class="tag">BCEM341</div>
+        <h3>Plasmid Purification</h3>
+        <p>Plasmid DNA purification and restriction endonuclease analysis via agarose gel electrophoresis and nanodrop spectrophotometry.</p>
+      </div>
+      <div class="card">
+        <div class="tag">KNES373</div>
+        <h3>Ramp Protocols &amp; PPO</h3>
+        <p>Original research on incremental ramp rate protocols and peak power output using metabolic cart testing.</p>
+      </div>
+      <div class="card">
+        <div class="tag">OCHEM351</div>
+        <h3>Analgesic Analysis</h3>
+        <p>Chemical analysis of analgesics using thin-layer chromatography (TLC) and UV detection.</p>
+      </div>
+      <div class="card">
+        <div class="tag">KNES260 / 259</div>
+        <h3>Cadaver Anatomy Lab</h3>
+        <p>Hands-on ATSSL cadaver musculoskeletal gross anatomy labs, including observed dissections.</p>
+      </div>
+      <div class="card">
+        <div class="tag">2023</div>
+        <h3>James Fowler High School</h3>
+        <p>Graduated with Honors — Advanced Placement.</p>
+      </div>
+    </div>
+  </section>
 
-      <button class="scroll-btn" onclick="document.getElementById('professional').scrollIntoView({behavior:'smooth'})">
-        ↓ Explore
-      </button>
-    </section>
+  <!-- ================= RESEARCH ================= -->
+  <section id="research" class="reveal">
+    <div class="eyebrow">03 — Research</div>
+    <h2>Research Experience</h2>
+    <div class="research-box">
+      <div class="tl-role">Research Assistant — MOMENTUM Study</div>
+      <div class="tl-org">Barha Brain Health Lab, Faculty of Kinesiology, University of Calgary · Sept 2026 – Present</div>
+      <ul>
+        <li>Supporting data collection for women participating in a cohort study examining health and quality of life across the menopause trajectory, including cognitive assessments under research protocol</li>
+        <li>Conducting participant recruitment, data entry, and literature reviews while maintaining strict participant confidentiality</li>
+        <li>Supporting blood sample processing and contributing to ongoing projects within the MOMENTUM research collaborative</li>
+        <li>Presenting practicum findings via PowerPoint to Dr. Barha and research associates at term end</li>
+      </ul>
+    </div>
+  </section>
 
-    <!-- PROFESSIONAL -->
-    <section id="professional" class="offset-left reveal">
-      <div class="section-box">
-        <h2>Professional</h2>
-        <div class="links">
-          <a class="pill" href="https://www.linkedin.com/in/roey-yu-853a39260/" target="_blank">LinkedIn</a>
-          <a class="pill" href="https://www.instagram.com/_roeyyu_/" target="_blank">Instagram</a>
-          <span class="pill">yuroey@gmail.com</span>
-          <span class="pill">587-225-4225</span>
+  <!-- ================= EXPERIENCE (timeline) ================= -->
+  <section id="experience" class="reveal">
+    <div class="eyebrow">04 — Experience</div>
+    <h2>Clinical &amp; Applied Work</h2>
+
+    <div class="tl-item">
+      <div class="tl-role">Physiotherapy / Chiropractic Clinic Assistant</div>
+      <div class="tl-org">Active Sports Therapy — Calgary, AB · Jan 2026 – Present</div>
+      <ul>
+        <li>Started as a practicum student, promoted to a paid, ongoing clinic assistant role based on performance</li>
+        <li>Operated Juvonno scheduling software to book appointments and coordinate treatment transitions across a multi-patient caseload</li>
+        <li>Applied clinical terminology to maintain accurate documentation and communicate with doctors, practitioners, and patients</li>
+        <li>Independently opened and set up daily clinic operations; operated interferential current, Class IV laser therapy, and cryotherapy</li>
+        <li>Assisted practitioners with patient care and Active Release Techniques (ART)</li>
+      </ul>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-role">Lead Event Technician</div>
+      <div class="tl-org">Kuha Studios — Calgary, AB · Seasonal / Ongoing</div>
+      <ul>
+        <li>Led on-site operations for high-volume public events, including the Calgary Stampede, and private weddings, without direct supervisor oversight</li>
+        <li>First on-site to set up, test, and troubleshoot technical equipment — software, printers, cameras, and booth systems</li>
+        <li>Executed equipment transport and full technical infrastructure build-outs under tight timelines</li>
+        <li>Directed a team of on-site employees, delegating tasks and troubleshooting in real time</li>
+      </ul>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-role">Personal Trainer</div>
+      <div class="tl-org">Crunch Fitness — Calgary, AB · May 2025 – Aug 2025</div>
+      <ul>
+        <li>Independently conducted fitness consultations to assess client goals and guide program selection</li>
+        <li>Built and maintained a consistent client base through coaching and communication</li>
+        <li>Operated and interpreted the InBody body composition analyzer for progress tracking</li>
+      </ul>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-role">Rehabilitation Program Assistant — Volunteer</div>
+      <div class="tl-org">University of Calgary Active Living — Calgary, AB · Aug 2025 – Present</div>
+      <ul>
+        <li>Led and assisted participants through individualized exercise programs targeting strength, mobility, and balance</li>
+        <li>Adapted exercises safely for individuals with chronic disabilities</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= LEADERSHIP ================= -->
+  <section id="leadership" class="reveal">
+    <div class="eyebrow">05 — Leadership</div>
+    <h2>Community &amp; Mentorship</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="tag">Ongoing</div>
+        <h3>Asst. Chairperson, Education &amp; Livelihood Committee</h3>
+        <p>Local Community Youth Organization — directed programming, coordinated events, and led college/career workshops plus structured Tagalog-language classes.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Active Sports Therapy</div>
+        <h3>Mentorship &amp; Onboarding</h3>
+        <p>Trained and supervised incoming practicum students as a retained paid employee, establishing clinical onboarding workflows and patient safety protocols.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CERTS + SKILLS ================= -->
+  <section id="skills" class="reveal">
+    <div class="eyebrow">06 — Credentials</div>
+    <h2>Certifications &amp; Skills</h2>
+
+    <ul class="cert-list">
+      <li><b>Standard First Aid with CPR/AED C (BL)</b><em>Canadian Red Cross · valid to Jun 2028</em></li>
+      <li><b>TCPS 2: CORE 2022 Research Ethics</b><em>Panel on Research Ethics · 2023</em></li>
+      <li><b>World Rugby First Aid Certification</b><em>World Rugby · 2024</em></li>
+      <li><b>OHSA &amp; AODA Certification</b><em>Workright Ltd · 2025</em></li>
+      <li><b>Chemistry Safety Course</b><em>University of Calgary · 2022</em></li>
+    </ul>
+
+    <div style="margin-top:2.6rem;">
+      <div class="skillcat">
+        <h4>Scheduling &amp; Clinical Systems</h4>
+        <div class="skillband">
+          <span class="skillchip">Juvonno</span><span class="skillchip">Patient Flow Coordination</span><span class="skillchip">Treatment Timeline Mgmt</span>
         </div>
       </div>
-    </section>
-
-    <!-- PERSONAL -->
-    <section class="offset-right reveal">
-      <div class="section-box">
-        <h2>Personal</h2>
-        <div class="links">
-          <a class="pill" href="https://open.spotify.com/user/4788p79ms20bt70l3z34es18t" target="_blank">Spotify</a>
-          <a class="pill" href="https://letterboxd.com/roeyu/" target="_blank">Letterboxd</a>
-          <a class="pill" href="https://steamcommunity.com/profiles/76561199225402800/" target="_blank">Steam</a>
-          <a class="pill" href="https://www.twitch.tv/oroeyo" target="_blank">Twitch</a>
-          <a class="pill" href="https://myanimelist.net/animelist/roeyo" target="_blank">Anime</a>
-          <a class="pill" href="https://minesweeper.online/player/9797373" target="_blank">Sweeping</a>
-          <a class="pill" href="https://wank.wavu.wiki/player/5ANMm5Nihg8h?graph=sess" target="_blank">T8</a>
-          <a class="pill" href="https://www.instagram.com/roeyu_an/" target="_blank">Photography IG</a>
-          <a class="pill" href="https://vsco.co/roeyyu/gallery" target="_blank">VSCO</a>
+      <div class="skillcat">
+        <h4>Clinical Documentation</h4>
+        <div class="skillband">
+          <span class="skillchip">Medical Terminology</span><span class="skillchip">EMR</span><span class="skillchip">Confidentiality Protocols</span>
         </div>
       </div>
-    </section>
-
-    <!-- ACADEMICS -->
-    <section class="offset-left reveal">
-      <div class="section-box">
-        <h2>Academic Work</h2>
-        <div class="grid">
-          <div class="card"><h3>Stroke Rehab (MCA)</h3><p>Pathology, recovery, and rehabilitation strategy.</p></div>
-          <div class="card"><h3>Aspirin & Caffeine</h3><p>OCEM synthesis, purification, TLC analysis.</p></div>
-          <div class="card"><h3>Cadaver Lab</h3><p>Applied musculoskeletal anatomy.</p></div>
-          <div class="card"><h3>SymmetryU Ergoline</h3><p>Pharmacology and PPO-IC context.</p></div>
+      <div class="skillcat">
+        <h4>Office &amp; Communication</h4>
+        <div class="skillband">
+          <span class="skillchip">MS Word/Excel/PPT</span><span class="skillchip">SharePoint</span><span class="skillchip">Zoom / Webex</span>
         </div>
       </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section class="offset-right reveal">
-      <div class="section-box">
-        <h2>Experience</h2>
-        <div class="grid">
-          <div class="card"><h3>Crunch Fitness</h3><p>Consultations, InBody analysis, personal training.</p></div>
-          <div class="card"><h3>AST Physiotherapy</h3><p>Laser, ART, acupuncture, MT, chiropractic support.</p></div>
-          <div class="card"><h3>UofC Rehab Volunteer</h3><p>Individualized rehab sessions.</p></div>
-        </div>
-
-        <div class="skills">
-          <span class="skill">Client Assessment</span>
-          <span class="skill">Laser Therapy</span>
-          <span class="skill">ART & IFC</span>
-          <span class="skill">InBody Analysis</span>
-          <span class="skill">Rehab Assistance</span>
-          <span class="skill">Professional Communication</span>
+      <div class="skillcat">
+        <h4>Media &amp; Technical</h4>
+        <div class="skillband">
+          <span class="skillchip">DaVinci Resolve</span><span class="skillchip">Canva</span><span class="skillchip">A/V Booth Systems</span>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </div>
+  <!-- ================= PERSONAL ================= -->
+  <section id="personal" class="reveal">
+    <div class="eyebrow">07 — Off the Clock</div>
+    <h2>Personal</h2>
+    <p>Photography, film, records, and whatever's on screen.</p>
 
-  <footer>© 2025 Roey Yu</footer>
+    <div class="polaroid-row">
+      <a class="polaroid" href="https://www.instagram.com/roeyu_an/" target="_blank" rel="noopener" style="transform:rotate(-4deg);">
+        <div class="ph" style="background:linear-gradient(140deg,#7fa98e,#2b332d);"></div>
+        <figcaption>PHOTOGRAPHY IG</figcaption>
+      </a>
+      <a class="polaroid" href="https://vsco.co/roeyyu/gallery" target="_blank" rel="noopener" style="transform:rotate(3deg);">
+        <div class="ph" style="background:linear-gradient(140deg,#e8542e,#2b1b14);"></div>
+        <figcaption>VSCO</figcaption>
+      </a>
+      <a class="polaroid" href="https://letterboxd.com/roeyu/" target="_blank" rel="noopener" style="transform:rotate(-2deg);">
+        <div class="ph" style="background:linear-gradient(140deg,#3c4a41,#0d1210);"></div>
+        <figcaption>LETTERBOXD</figcaption>
+      </a>
+      <a class="polaroid" href="https://myanimelist.net/animelist/roeyo" target="_blank" rel="noopener" style="transform:rotate(4deg);">
+        <div class="ph" style="background:linear-gradient(140deg,#c9c2b2,#3c4a41);"></div>
+        <figcaption>ANIME LIST</figcaption>
+      </a>
+    </div>
 
-  <script>
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          entry.target.classList.toggle('active', entry.isIntersecting);
-        });
-      },
-      { threshold: 0.35 }
-    );
+    <div style="display:flex; align-items:center; gap:1.6rem; margin-bottom:2.2rem; flex-wrap:wrap;">
+      <div class="vinyl"></div>
+      <div>
+        <div class="tl-role" style="font-size:1.05rem;">On rotation</div>
+        <a class="pill" style="margin-top:.6rem; display:inline-block;" href="https://open.spotify.com/user/4788p79ms20bt70l3z34es18t" target="_blank" rel="noopener">Spotify ↗</a>
+      </div>
+    </div>
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  </script>
+    <div class="linkgrid">
+      <a class="pill" href="https://steamcommunity.com/profiles/76561199225402800/" target="_blank" rel="noopener">Steam ↗</a>
+      <a class="pill" href="https://www.twitch.tv/oroeyo" target="_blank" rel="noopener">Twitch ↗</a>
+      <a class="pill" href="https://minesweeper.online/player/9797373" target="_blank" rel="noopener">Minesweeper ↗</a>
+    </div>
+  </section>
+
+  <!-- ================= TEKKEN ================= -->
+  <section id="tekken" class="reveal">
+    <div class="eyebrow">08 — Arcade Record</div>
+    <h2>Tekken 8</h2>
+    <div class="crt">
+      <div class="rank-badge">God of Destruction I</div>
+      <div class="rank-sub">Peak rank achieved · previous season · currently grinding back</div>
+      <div class="stat-row">
+        <div class="stat"><b>GOD I</b><span>Peak Rank</span></div>
+        <div class="stat"><b>Past</b><span>Status</span></div>
+        <div class="stat"><b>Live</b><span>Match History</span></div>
+      </div>
+      <a class="pill" style="margin-top:2rem; display:inline-block;" href="https://wank.wavu.wiki/player/5ANMm5Nihg8h?graph=sess" target="_blank" rel="noopener">Wavu Wiki Stats ↗</a>
+    </div>
+  </section>
+
+  <footer class="reveal">
+    <div class="fname">Roey A. Yu</div>
+    <p>Calgary, Alberta — yuroey@gmail.com — © 2026</p>
+  </footer>
+
+</div>
+
+<script>
+  // Reveal on scroll
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => e.target.classList.toggle('active', e.isIntersecting));
+  }, { threshold: 0.18 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // Spine fill progress
+  const spineFill = document.getElementById('spineFill');
+  function updateSpine(){
+    const doc = document.documentElement;
+    const scrolled = doc.scrollTop;
+    const max = doc.scrollHeight - doc.clientHeight;
+    const pct = max > 0 ? (scrolled / max) * 100 : 0;
+    spineFill.style.height = pct + '%';
+  }
+  document.addEventListener('scroll', () => requestAnimationFrame(updateSpine), { passive:true });
+  window.addEventListener('resize', updateSpine);
+  updateSpine();
+
+  // Vertebra nodes placed at each section + lit when active
+  const sections = document.querySelectorAll('section[id]');
+  const wrap = document.querySelector('.wrap');
+  sections.forEach(sec => {
+    const dot = document.createElement('div');
+    dot.className = 'vertebra';
+    document.body.appendChild(dot);
+    function place(){
+      const rect = sec.getBoundingClientRect();
+      dot.style.top = (window.scrollY + rect.top + 40) + 'px';
+    }
+    place();
+    window.addEventListener('resize', place);
+    window.addEventListener('load', place);
+    setTimeout(place, 300);
+
+    const dotObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => dot.classList.toggle('lit', e.isIntersecting));
+    }, { threshold: 0.4 });
+    dotObserver.observe(sec);
+  });
+</script>
 
 </body>
 </html>
